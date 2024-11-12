@@ -73,9 +73,12 @@ class UserName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Ensure that 'name' is not null, otherwise use a fallback value.
+    String name = Global.storageServices.getUserProfile().name ?? 'Guest';
+
     return Container(
       child: text24Normal(
-        text: Global.storageServices.getUserProfile().name!,
+        text: name,
         fontWeight: FontWeight.bold,
       ),
     );
@@ -107,10 +110,16 @@ AppBar homeAppBar(WidgetRef ref) {
         children: [
           appImage(width: 18.w, height: 12.h, imagePath: ImageRes.menu),
           profileState.when(
-              data: (value) => GestureDetector(
+              data: (value) {
+                // Check if avatar is null before using it
+                String avatarUrl = value.avatar ??
+                    ''; // Default to empty string if avatar is null
+                return GestureDetector(
                   child: AppBoxDecorationImage(
-                      imagePath:
-                          "${AppConstants.SERVER_API_URL}${value.avatar!}")),
+                    imagePath: "${AppConstants.SERVER_API_URL}$avatarUrl",
+                  ),
+                );
+              },
               error: (err, stack) => appImage(
                   width: 18.w, height: 12.h, imagePath: ImageRes.profile),
               loading: () => Container())
