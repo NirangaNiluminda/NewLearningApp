@@ -107,13 +107,35 @@ AppBar homeAppBar(WidgetRef ref) {
         children: [
           appImage(width: 18.w, height: 12.h, imagePath: ImageRes.menu),
           profileState.when(
-            data: (value) => GestureDetector(child: AppBoxDecorationImage(imagePath: "${AppConstants.SERVER_API_URL}${value.avatar!}")), 
-            error:(err, stack) => appImage(width: 18.w, height: 12.h, imagePath: ImageRes.profile), 
-            loading: ()=> Container()
-            )
-
+              data: (value) => GestureDetector(
+                  child: AppBoxDecorationImage(
+                      imagePath:
+                          "${AppConstants.SERVER_API_URL}${value.avatar!}")),
+              error: (err, stack) => appImage(
+                  width: 18.w, height: 12.h, imagePath: ImageRes.profile),
+              loading: () => Container())
         ],
       ),
     ),
   );
+}
+
+class HomeMenuBar extends StatelessWidget {
+  const HomeMenuBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 15.h),
+      child: const Row(
+        children: [
+          Text16Normal(
+            text: "choice your course",
+            color: AppColors.primaryText,
+            fontWeight: FontWeight.bold,
+          ),
+        ],
+      ),
+    );
+  }
 }

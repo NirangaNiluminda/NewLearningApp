@@ -23,6 +23,26 @@ Widget text16Normal(
   );
 }
 
+class Text16Normal extends StatelessWidget {
+  final String text;
+  final Color color;
+  final FontWeight fontWeight;
+  const Text16Normal(
+      {super.key,
+      this.text = "",
+      this.color = AppColors.primarySecondaryElementText,
+      this.fontWeight = FontWeight.normal});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: TextAlign.center,
+      style: TextStyle(color: color, fontSize: 16, fontWeight: fontWeight),
+    );
+  }
+}
+
 class Text14Normal extends StatelessWidget {
   final String text;
   final Color color;
