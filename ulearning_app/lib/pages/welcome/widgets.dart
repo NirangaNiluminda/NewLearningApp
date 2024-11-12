@@ -37,7 +37,7 @@ class AppOnboardingPage extends StatelessWidget {
         Container(
           margin: const EdgeInsets.only(top: 10),
           padding: const EdgeInsets.only(left: 30, right: 30),
-          child: text16Normal(text: subTitle),
+          child: Text16Normal(text: subTitle),
         ),
         _nextButton(index, controller, context),
       ],
@@ -64,7 +64,7 @@ Widget appOnboardingPage(PageController controller,
       Container(
         margin: const EdgeInsets.only(top: 10),
         padding: const EdgeInsets.only(left: 30, right: 30),
-        child: text16Normal(text: subTitle),
+        child: Text16Normal(text: subTitle),
       ),
       _nextButton(index, controller, context),
     ],

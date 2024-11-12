@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:ulearning_app/common/widgets/app_bar.dart';
+import 'package:ulearning_app/common/widgets/image_widgets.dart';
 import 'package:ulearning_app/common/widgets/search_widgets.dart';
 import 'package:ulearning_app/pages/home/controller/home_controller.dart';
 
@@ -49,6 +50,7 @@ class _HomeState extends ConsumerState<Home> {
               SizedBox(height: 20.h),
               HomeBanner(ref: ref, controller: _controller),
               const HomeMenuBar(),
+              const CourseItemGrid(),
             ],
           ),
         ),

@@ -14,15 +14,6 @@ Widget text24Normal(
   );
 }
 
-Widget text16Normal(
-    {String text = "", Color color = AppColors.primarySecondaryElementText}) {
-  return Text(
-    text,
-    textAlign: TextAlign.center,
-    style: TextStyle(color: color, fontSize: 16, fontWeight: FontWeight.normal),
-  );
-}
-
 class Text16Normal extends StatelessWidget {
   final String text;
   final Color color;
@@ -63,6 +54,51 @@ class Text14Normal extends StatelessWidget {
     );
   }
 }
+
+
+class Text11Normal extends StatelessWidget {
+  final String text;
+  final Color color;
+
+  const Text11Normal(
+      {Key? key,
+        this.text = "",
+        this.color = AppColors.primaryElementText})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: TextAlign.start,
+      style:
+      TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.normal),
+    );
+  }
+}
+
+class Text10Normal extends StatelessWidget {
+  final String text;
+  final Color color;
+
+  const Text10Normal(
+      {Key? key,
+      this.text = "",
+      this.color = AppColors.primaryThreeElementText})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      textAlign: TextAlign.start,
+      style:
+          TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.normal),
+    );
+  }
+}
+
+
 
 Widget textUnderline({String text = "Your text"}) {
   return GestureDetector(
