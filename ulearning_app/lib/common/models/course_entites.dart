@@ -145,7 +145,7 @@ class CourseItem {
   String? video;
   String? price;
   String? amount_total;
-  String? lesson_num;
+  int? lesson_num;
   int? video_len;
   int? down_num;
   int? follow;

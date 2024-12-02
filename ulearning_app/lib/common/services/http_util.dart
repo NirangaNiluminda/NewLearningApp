@@ -64,6 +64,12 @@ class HttpUtil {
   }
 }
 
+
+
+
+
+
+
 class ErrorEntity implements Exception {
   int code = -1;
   String message = "";
@@ -75,6 +81,50 @@ class ErrorEntity implements Exception {
     return "Exception Code $code , $message";
   }
 }
+
+// ErrorEntity createErrorEntity(DioException error) {
+//   switch (error.type) {
+//     case DioExceptionType.connectionTimeout:
+//       return ErrorEntity(code: -1, message: "Connection Timeout");
+//     case DioExceptionType.sendTimeout:
+//       return ErrorEntity(code: -1, message: "Send Timeout");
+//     case DioExceptionType.receiveTimeout:
+//       return ErrorEntity(code: -1, message: "Receive Timeout");
+//     case DioExceptionType.badCertificate:
+//       return ErrorEntity(code: -1, message: "Bad SSL Certificate");
+//     case DioExceptionType.badResponse:
+//       print("bad response....");
+//       switch (error.response!.statusCode) {
+//         case 400:
+//           return ErrorEntity(code: 400, message: "Request syntax error");
+//         case 401:
+//           return ErrorEntity(code: 401, message: "Unauthorized Access");
+//         case 403:
+//           return ErrorEntity(code: 403, message: "Forbidden Access");
+//         case 404:
+//           return ErrorEntity(code: 404, message: "Not Found");
+//         case 409:
+//           return ErrorEntity(code: 409, message: "Conflict");
+//         case 422:
+//           return ErrorEntity(code: 422, message: "Unprocessable Entity");
+//         case 500:
+//           return ErrorEntity(code: 500, message: "Internal Server Error");
+//         default:
+//           return ErrorEntity(code: -1, message: "Bad Response11");
+//       }
+      
+//     case DioExceptionType.cancel:
+//       return ErrorEntity(code: -1, message: "server Cancelled it");
+//     case DioExceptionType.connectionError:
+//       return ErrorEntity(code: -1, message: "Connection Error");
+//     case DioExceptionType.unknown:
+//       return ErrorEntity(code: -1, message: "Unknown Error");
+//   }
+// }
+
+
+
+
 
 ErrorEntity createErrorEntity(DioException error) {
   switch (error.type) {
@@ -88,6 +138,15 @@ ErrorEntity createErrorEntity(DioException error) {
       return ErrorEntity(code: -1, message: "Bad SSL Certificate");
     case DioExceptionType.badResponse:
       print("bad response....");
+
+      // Print full error details
+      if (error.response != null) {
+        print("Response Status Code: ${error.response!.statusCode}");
+        print("Response Body: ${error.response!.data}");
+        print("Response Headers: ${error.response!.headers}");
+      }
+
+      // Return the appropriate error message based on status code
       switch (error.response!.statusCode) {
         case 400:
           return ErrorEntity(code: 400, message: "Request syntax error");
@@ -104,9 +163,9 @@ ErrorEntity createErrorEntity(DioException error) {
         case 500:
           return ErrorEntity(code: 500, message: "Internal Server Error");
         default:
-          return ErrorEntity(code: -1, message: "Bad Response");
+          return ErrorEntity(code: -1, message: "Bad Response11");
       }
-      return ErrorEntity(code: -1, message: "Bad Response");
+      
     case DioExceptionType.cancel:
       return ErrorEntity(code: -1, message: "server Cancelled it");
     case DioExceptionType.connectionError:
@@ -116,26 +175,59 @@ ErrorEntity createErrorEntity(DioException error) {
   }
 }
 
+
+
+
+
+
+
 void onError(ErrorEntity eInfo) {
   // Handle error here
-  print("Error.code-> ${eInfo.code}, error.massage-> ${eInfo.message}");
+  print("Error.code-> ${eInfo.code}, error.message-> ${eInfo.message}");
   switch (eInfo.code) {
     case 400:
       print("server syntax error");
       break;
     case 401:
       // Handle Unauthorized Access
-      print("Your are denied access");
-
+      print("You are denied access");
       break;
 
     case 500:
-      // Handle Server Error
-      print("Internal server error");
+      // Handle Internal Server Error
+      print("Internal server error occurred.");
+      
       break;
+
     default:
       // Handle Other Errors
       print("Unknown Error");
       break;
   }
 }
+
+
+// void onError(ErrorEntity eInfo) {
+//   // Handle error here
+//   print("Error.code-> ${eInfo.code}, error.massage-> ${eInfo.message}");
+//   switch (eInfo.code) {
+//     case 400:
+//       print("server syntax error");
+//       break;
+//     case 401:
+//       // Handle Unauthorized Access
+//       print("Your are denied access");
+
+//       break;
+
+//     case 500:
+//       // Handle Server Error
+//       print("Internal server error");
+      
+//       break;
+//     default:
+//       // Handle Other Errors
+//       print("Unknown Error");
+//       break;
+//   }
+// }
