@@ -15,16 +15,17 @@ class HomeScreenBannerDots extends _$HomeScreenBannerDots {
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class HomeUserProfile extends _$HomeUserProfile {
   FutureOr<UserProfile> build() {
     return Global.storageServices.getUserProfile();
   }
 }
 
-@riverpod
+@Riverpod(keepAlive: true)
 class HomeCourseList extends _$HomeCourseList {
-  Future<List<CourseItem>?> _fetchCourseList() async {
+
+  Future<List<CourseItem>?> fetchCourseList() async {
     var result = await CourseAPI.courseList();
     if (result.code == 200) {
       return result.data;
@@ -32,11 +33,13 @@ class HomeCourseList extends _$HomeCourseList {
     return null;
   }
 
-  
+
 
    @override
   FutureOr<List<CourseItem>?> build() async {
-    
-    return _fetchCourseList();
+
+    return fetchCourseList();
   }
+
+
 }
