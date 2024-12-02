@@ -22,7 +22,7 @@ Widget appTextField(
           height: 5.h,
         ),
         Container(
-          width: 325.w,
+          width: 420.w,
           height: 50.h,
           //color: Colors.red,
           decoration: appBoxDecorationTextField(),
@@ -31,7 +31,7 @@ Widget appTextField(
             children: [
               //for showing the icons
               Container(
-                margin: EdgeInsets.only(left: 17.w),
+                margin: EdgeInsets.only(left: 10.w),
                 child: appImage(imagePath: iconName),
               ),
               //for showing the text field
