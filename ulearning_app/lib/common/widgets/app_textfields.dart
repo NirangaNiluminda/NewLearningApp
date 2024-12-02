@@ -29,7 +29,7 @@ Widget appTextField(
           //crating the rows
           child: Row(
             children: [
-              //for showing the icons
+              //for showing the icons for error
               Container(
                 margin: EdgeInsets.only(left: 10.w),
                 child: appImage(imagePath: iconName),
