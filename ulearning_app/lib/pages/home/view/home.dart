@@ -50,7 +50,7 @@ class _HomeState extends ConsumerState<Home> {
               SizedBox(height: 20.h),
               HomeBanner(ref: ref, controller: _controller),
               const HomeMenuBar(),
-              const CourseItemGrid(),
+              CourseItemGrid(ref:ref),
             ],
           ),
         ),

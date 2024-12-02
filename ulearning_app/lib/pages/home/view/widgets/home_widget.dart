@@ -174,13 +174,12 @@ class HomeMenuBar extends StatelessWidget {
               ),
             ),
             Container(
-              margin:EdgeInsets.only(left: 30.w),
+              margin: EdgeInsets.only(left: 30.w),
               child: const Text11Normal(
                   text: "Popular", color: AppColors.primaryThreeElementText),
             ),
-
             Container(
-              margin:EdgeInsets.only(left: 30.w),
+              margin: EdgeInsets.only(left: 30.w),
               child: const Text11Normal(
                   text: "Newest", color: AppColors.primaryThreeElementText),
             ),
@@ -191,21 +190,82 @@ class HomeMenuBar extends StatelessWidget {
   }
 }
 
-class CourseItemGrid extends StatelessWidget{
-  const CourseItemGrid({Key?key}) : super(key: key);
+// class CourseItemGrid extends StatelessWidget {
+//   final WidgetRef ref;
+//   const CourseItemGrid({Key? key, required this.ref}) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     final courseState = ref.watch(homeCourseListProvider);
+//     print(courseState);
+//     return courseState.when(
+      
+//         data: (data) => Container(
+//               child: GridView.builder(
+//                   physics: ScrollPhysics(),
+//                   shrinkWrap: true,
+//                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+//                     crossAxisCount: 2,
+//                     crossAxisSpacing: 40,
+//                     mainAxisSpacing: 40,
+//                   ),
+//                   itemCount: 6,
+//                   itemBuilder: (_, int index) {
+//                     return appImage();
+//                   }),
+//             ),
+//         error: (error, stackTrace) {
+//           print(stackTrace.toString());
+//           return const Center(child: Text("Eroor loading"));
+//         },
+//         loading: () => Center(child: Text("Loading...")));
+//   }
+// }
+
+
+class CourseItemGrid extends StatelessWidget {
+  final WidgetRef ref;
+  const CourseItemGrid({Key? key, required this.ref}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      child: GridView.builder(
-          physics: ScrollPhysics(),
-          shrinkWrap: true,
-          gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,
-          crossAxisSpacing: 40,
-          mainAxisSpacing: 40,),
-          itemCount: 6,
-          itemBuilder: (_,int index){
-            return appImage();
-          }),
+    final courseState = ref.watch(homeCourseListProvider);
+
+    return courseState.when(
+      data: (data) {
+        // Print the data to the console
+        print('Course Data: $data');
+        
+        // You can also print the specific fields if it's a structured object
+        // If 'data' is a list of courses, you can print each item
+        if (data is List) {
+          for (var item in data!) {
+            print('Course Item: $item');
+          }
+        }
+
+        return Container(
+          child: GridView.builder(
+            physics: ScrollPhysics(),
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 40,
+              mainAxisSpacing: 40,
+            ),
+            itemCount: data?.length, // Assuming 'data' is a list of courses
+            itemBuilder: (_, int index) {
+              // Customize the display for each course item
+              return appImage(); // Replace with your actual widget to display course item
+            },
+          ),
+        );
+      },
+      error: (error, stackTrace) {
+        print('Error: $error');
+        print('StackTrace: $stackTrace');
+        return const Center(child: Text("Error loading"));
+      },
+      loading: () => Center(child: Text("Loading11...")),
     );
   }
 }
