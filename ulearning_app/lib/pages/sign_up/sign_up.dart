@@ -91,7 +91,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                       ),
                       SizedBox(height: 100.h),
                       Center(
-                        child: appButton(
+                        child: AppButton(
                           buttonName: "Sign Up",
                           isLogin: true,
                           context: context,

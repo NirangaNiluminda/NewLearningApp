@@ -10,6 +10,8 @@ class ImageRes {
   static const String _imageBase = "assets/icons";
   static const String defaultImg = "$_imageBase/default.png";
   static const String user = '$_imageBase/user.png';
+  static const String people = '$_imageBase/people.png';
+   static const String star = '$_imageBase/star.png';
   static const String lock = "$_imageBase/lock.png";
   static const String home = '$_imageBase/home.png';
   static const String search = '$_imageBase/search2.png';
@@ -23,7 +25,19 @@ class ImageRes {
   static const String banner3 = '$_imageBase/Image(2).png';
   static const String menu = '$_imageBase/menu.png';
   static const String profile = '$_imageBase/profile.png';
+
+
+  static const String videoDetail = '$_imageBase/video_detail.png';
+
+  static const String fileDetail = '$_imageBase/file_detail.png';
+  static const String downloadDetail = '$_imageBase/download_detail.png';
+
+
   static const String reading = 'assets/images/reading.png';
   static const String man = 'assets/images/man.png';
   static const String boy = 'assets/images/boy.png';
+
+
+
+
 }

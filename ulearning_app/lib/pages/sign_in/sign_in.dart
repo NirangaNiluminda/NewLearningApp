@@ -86,7 +86,7 @@ class _SignInState extends ConsumerState<SignIn> {
                       SizedBox(height: 100.h),
                       // Login button
                       Center(
-                        child: appButton(
+                        child: AppButton(
                           buttonName: "Login",
                           func: () => _controller.handleSignIn(ref),
                         ),
@@ -94,7 +94,7 @@ class _SignInState extends ConsumerState<SignIn> {
                       SizedBox(height: 20.h),
                       // Register button
                       Center(
-                        child: appButton(
+                        child: AppButton(
                           buttonName: "Register",
                           isLogin: false,
                           context: context,

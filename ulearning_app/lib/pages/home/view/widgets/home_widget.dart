@@ -108,7 +108,7 @@ AppBar homeAppBar(WidgetRef ref) {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          appImage(width: 18.w, height: 12.h, imagePath: ImageRes.menu),
+          AppImage(width: 18.w, height: 12.h, imagePath: ImageRes.menu),
           profileState.when(
               data: (value) {
                 // Check if avatar is null before using it
@@ -120,7 +120,7 @@ AppBar homeAppBar(WidgetRef ref) {
                   ),
                 );
               },
-              error: (err, stack) => appImage(
+              error: (err, stack) => AppImage(
                   width: 18.w, height: 12.h, imagePath: ImageRes.profile),
               loading: () => Container())
         ],

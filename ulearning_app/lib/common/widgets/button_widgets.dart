@@ -8,27 +8,65 @@ import 'package:ulearning_app/common/widgets/text_widgets.dart';
 import 'package:ulearning_app/pages/sign_in/widgets/sign_in_widgets.dart';
 import 'package:ulearning_app/pages/sign_up/sign_up.dart';
 
-Widget appButton(
-    {double width = 325,
-    double height = 50,
-    String buttonName = "",
-    bool isLogin = true,
-    BuildContext? context,
-    void Function()? func}) {
-  return GestureDetector(
-    onTap: func,
-    child: Container(
-      width: 325.w,
-      height: 50.h,
-      decoration: appBoxShadow(
-          color: isLogin ? AppColors.primaryElement : Colors.white,
-          boxBorder: Border.all(color: AppColors.primaryFourElementText)),
-      child: Center(
-          child: Text16Normal(
-              text: buttonName,
-              color: isLogin
-                  ? AppColors.primaryBackground
-                  : AppColors.primaryText)),
-    ),
-  );
+// Widget appButton(
+//     {double width = 325,
+//     double height = 50,
+//     String buttonName = "",
+//     bool isLogin = true,
+//     BuildContext? context,
+//     void Function()? func}) {
+//   return GestureDetector(
+//     onTap: func,
+//     child: Container(
+//       width: 325.w,
+//       height: 50.h,
+//       decoration: appBoxShadow(
+//           color: isLogin ? AppColors.primaryElement : Colors.white,
+//           boxBorder: Border.all(color: AppColors.primaryFourElementText)),
+//       child: Center(
+//           child: Text16Normal(
+//               text: buttonName,
+//               color: isLogin
+//                   ? AppColors.primaryBackground
+//                   : AppColors.primaryText)),
+//     ),
+//   );
+// }
+
+class AppButton extends StatelessWidget {
+  final double width;
+  final double height;
+  final String buttonName;
+  final bool isLogin;
+  final BuildContext? context;
+  final void Function()? func;
+
+  const AppButton(
+      {Key? key,
+      this.width = 325,
+      this.height = 50,
+      this.buttonName = "",
+      this.isLogin = true,
+      this.context,
+      this.func});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: func,
+      child: Container(
+        width: 325.w,
+        height: 50.h,
+        decoration: appBoxShadow(
+            color: isLogin ? AppColors.primaryElement : Colors.white,
+            boxBorder: Border.all(color: AppColors.primaryFourElementText)),
+        child: Center(
+            child: Text16Normal(
+                text: buttonName,
+                color: isLogin
+                    ? AppColors.primaryBackground
+                    : AppColors.primaryText)),
+      ),
+    );
+  }
 }

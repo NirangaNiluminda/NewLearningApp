@@ -32,7 +32,7 @@ Widget appTextField(
               //for showing the icons for error
               Container(
                 margin: EdgeInsets.only(left: 10.w),
-                child: appImage(imagePath: iconName),
+                child: AppImage(imagePath: iconName),
               ),
               //for showing the text field
               appTextFieldOnly(
