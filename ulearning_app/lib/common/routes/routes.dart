@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ulearning_app/common/routes/app_routes_names.dart';
 import 'package:ulearning_app/global.dart';
 import 'package:ulearning_app/pages/application/application.dart';
+import 'package:ulearning_app/pages/course_detail/view/course_details.dart';
 import 'package:ulearning_app/pages/home/view/home.dart';
 import 'package:ulearning_app/pages/sign_in/sign_in.dart';
 import 'package:ulearning_app/pages/sign_up/sign_up.dart';
@@ -16,6 +17,7 @@ class AppPages {
       RouteEntity(path: AppRoutesNames.REGISTER, page: const SignUp()),
       RouteEntity(path: AppRoutesNames.APPLICATION, page: const Application()),
       RouteEntity(path: AppRoutesNames.HOME, page: const Home()),
+      RouteEntity(path: AppRoutesNames.COURSE_DETAILS, page: CourseDetail())
     ];
   }
 

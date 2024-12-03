@@ -190,7 +190,6 @@ class HomeMenuBar extends StatelessWidget {
   }
 }
 
-
 class CourseItemGrid extends StatelessWidget {
   final WidgetRef ref;
 
@@ -216,23 +215,13 @@ class CourseItemGrid extends StatelessWidget {
           itemBuilder: (_, int index) {
             return AppBoxDecorationImage(
               imagePath:
-              "${AppConstants.IMAGE_UPLOADS_PATH}${data![index].thumbnail!}",
+                  "${AppConstants.IMAGE_UPLOADS_PATH}${data![index].thumbnail!}",
               fit: BoxFit.fitWidth,
               courseItem: data[index],
               func: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return Scaffold(
-                        appBar: AppBar(),
-                        body: Center(
-                          child: Text(data[index].id.toString()),
-                        ),
-                      );
-                    },
-                  ),
-                );
+                Navigator.of(context).pushNamed("/courseDetail", arguments: {
+                  "id": data[index].id!
+                });
               },
             );
           },
