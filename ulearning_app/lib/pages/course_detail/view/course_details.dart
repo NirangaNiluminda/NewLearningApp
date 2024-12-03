@@ -51,8 +51,14 @@ class _CourseDetailState extends ConsumerState<CourseDetail> {
                         CourseDetailsThumbnail(courseItem: data),
                         CourseDetailIconText(courseItem: data,),
                         CourseDetailDescription(courseItem: data),
+<<<<<<< Updated upstream
                         CourseDetailGoBuyButton(),
                         CourseDetailsInclude()
+=======
+                        const CourseDetailGoBuyButton(),
+                        CourseDetailsInclude(courseItem:data),
+                        const LessonInfo(),
+>>>>>>> Stashed changes
                         
                       ],
                     ),

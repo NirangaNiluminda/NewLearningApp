@@ -12,14 +12,13 @@ BoxDecoration appBoxShadow({
   double radius = 15,
   double sR = 1,
   double bR = 2,
-  BoxBorder? boxBorder, BorderRadius? borderRadius,
-
+  BoxBorder? boxBorder,
+  BorderRadius? borderRadius,
 }) {
   return BoxDecoration(
       color: color,
       borderRadius: BorderRadius.circular(radius.w),
       border: boxBorder,
-
       boxShadow: [
         BoxShadow(
             color: Colors.grey.withOpacity(0.1),
@@ -82,6 +81,7 @@ BoxDecoration appBoxDecorationTextField(
       borderRadius: BorderRadius.circular(radius),
       border: Border.all(color: borderColor));
 }
+
 class AppBoxDecorationImage extends StatelessWidget {
   final double width;
   final double height;
@@ -117,49 +117,46 @@ class AppBoxDecorationImage extends StatelessWidget {
         child: courseItem == null
             ? Container()
             : Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                courseItem!.name!,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 11.sp,
-                  fontWeight: FontWeight.bold,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black.withOpacity(0.7),
-                      offset: Offset(1, 1),
-                      blurRadius: 2,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      courseItem!.name!,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 11.sp,
+                        fontWeight: FontWeight.bold,
+                        shadows: [
+                          Shadow(
+                            color: Colors.black.withOpacity(0.7),
+                            offset: Offset(1, 1),
+                            blurRadius: 2,
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 1.h),
+                    Text(
+                      "${courseItem!.lesson_num ?? 0} lessons",
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 10.sp,
+                        shadows: [
+                          Shadow(
+                            color: Colors.black.withOpacity(0.5),
+                            offset: Offset(1, 1),
+                            blurRadius: 1,
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.center,
                     ),
                   ],
                 ),
-                textAlign: TextAlign.center,
               ),
-              SizedBox(height: 1.h),
-              Text(
-                "${courseItem!.lesson_num ?? 0} lessons",
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 10.sp,
-                  shadows: [
-                    Shadow(
-                      color: Colors.black.withOpacity(0.5),
-                      offset: Offset(1, 1),
-                      blurRadius: 1,
-                    ),
-                  ],
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
 }
-
-
-

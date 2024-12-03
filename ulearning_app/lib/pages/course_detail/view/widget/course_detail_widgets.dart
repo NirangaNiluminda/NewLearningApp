@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/models/course_entites.dart';
 import 'package:ulearning_app/common/utils/app_colors.dart';
@@ -8,7 +9,54 @@ import 'package:ulearning_app/common/widgets/app_shadow.dart';
 import 'package:ulearning_app/common/widgets/button_widgets.dart';
 import 'package:ulearning_app/common/widgets/image_widgets.dart';
 import 'package:ulearning_app/common/widgets/text_widgets.dart';
+class CourseDetailsPage extends StatelessWidget {
+  final CourseItem courseItem;
 
+  const CourseDetailsPage({Key? key, required this.courseItem})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minWidth: constraints.maxWidth,
+                  minHeight: constraints.maxHeight,
+                ),
+                child: IntrinsicHeight(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CourseDetailsThumbnail(courseItem: courseItem),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            CourseDetailIconText(courseItem: courseItem),
+                            CourseDetailDescription(courseItem: courseItem),
+                            CourseDetailGoBuyButton(),
+                            CourseDetailsInclude(courseItem: courseItem),
+                            LessonInfo(),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
 class CourseDetailsThumbnail extends StatelessWidget {
   final CourseItem courseItem;
   const CourseDetailsThumbnail({Key? key, required this.courseItem})
@@ -17,10 +65,11 @@ class CourseDetailsThumbnail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBoxDecorationImage(
-        imagePath: "${AppConstants.IMAGE_UPLOADS_PATH}${courseItem.thumbnail}",
-        width: 325.w,
-        height: 200.h,
-        fit: BoxFit.fitWidth);
+      imagePath: "${AppConstants.IMAGE_UPLOADS_PATH}${courseItem.thumbnail}",
+      width: 325.w,
+      height: 200.h,
+      fit: BoxFit.fitWidth,
+    );
   }
 }
 
@@ -52,8 +101,7 @@ class CourseDetailIconText extends StatelessWidget {
               children: [
                 AppImage(imagePath: ImageRes.people),
                 Text11Normal(
-                  text:
-                      "${courseItem.follow == null ? "0" : courseItem.follow.toString()}",
+                  text: "${courseItem.follow ?? 0}",
                   color: AppColors.primaryThreeElementText,
                 )
               ],
@@ -65,13 +113,12 @@ class CourseDetailIconText extends StatelessWidget {
               children: [
                 AppImage(imagePath: ImageRes.star),
                 Text11Normal(
-                  text:
-                      "${courseItem.score == null ? "0" : courseItem.score.toString()}",
+                  text: "${courseItem.score ?? 0}",
                   color: AppColors.primaryThreeElementText,
                 )
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -91,7 +138,7 @@ class CourseDetailDescription extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text16Normal(
-            text: courseItem.name == null ? "No name found" : courseItem.name!,
+            text: courseItem.name ?? "No name found",
             color: AppColors.primaryText,
             textAlign: TextAlign.start,
             fontWeight: FontWeight.bold,
@@ -101,7 +148,7 @@ class CourseDetailDescription extends StatelessWidget {
               text: courseItem.description ?? "No description found",
               color: AppColors.primaryThreeElementText,
             ),
-          )
+          ),
         ],
       ),
     );
@@ -121,30 +168,143 @@ class CourseDetailGoBuyButton extends StatelessWidget {
 }
 
 class CourseDetailsInclude extends StatelessWidget {
-  const CourseDetailsInclude({super.key});
+  final CourseItem courseItem;
+  const CourseDetailsInclude({Key? key, required this.courseItem})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(top: 20.h),
-        child: Column(
-          children: [
-            Text14Normal(
-              text: "Course Includes",
-              color: AppColors.primaryText,
-              fontWeight: FontWeight.bold,
-            ),
+      margin: EdgeInsets.only(top: 20.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text14Normal(
+            text: "Course Includes",
+            color: AppColors.primaryText,
+            fontWeight: FontWeight.bold,
+          ),
+          SizedBox(height: 12.w),
+          CourseInfo(
+            imagePath: ImageRes.videoDetail,
+            length: courseItem.video_len,
+            infoText: "Hours Video",
+          ),
+          SizedBox(height: 16.w),
+          CourseInfo(
+            imagePath: ImageRes.fileDetail,
+            length: courseItem.lesson_num,
+            infoText: "Number of files",
+          ),
+          SizedBox(height: 16.w),
+          CourseInfo(
+            imagePath: ImageRes.downloadDetail,
+            length: courseItem.down_num,
+            infoText: "Number of items to download",
+          ),
+        ],
+      ),
+    );
+  }
+}
 
-            Container(
-              child: Row(
-                children: [
-                  Container(
-                    child: AppImage(imagePath: ImageRes.videoDetail,),
-                  )
-                ],
-              ),
-            )
-          ],
-        ));
+class CourseInfo extends StatelessWidget {
+  final String imagePath;
+  final int? length;
+  final String? infoText;
+  const CourseInfo({
+    Key? key,
+    required this.imagePath,
+    this.length,
+    this.infoText = "item",
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Container(
+          alignment: Alignment.center,
+          child: AppImage(
+            imagePath: imagePath,
+            width: 30,
+            height: 30,
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 10.w),
+          child: Text11Normal(
+            color: AppColors.primarySecondaryElementText,
+            text: "${length ?? 0} $infoText",
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class LessonInfo extends StatelessWidget {
+  const LessonInfo({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 20.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text14Normal(
+            text: "Lesson List",
+            color: AppColors.primaryText,
+            fontWeight: FontWeight.bold,
+          ),
+          SizedBox(height: 20.h),
+          // Wrap the list of lessons in a SizedBox with a fixed height
+          SizedBox(
+            height: 200.h, // Adjust this height as needed
+            child: ListView.builder(
+              shrinkWrap: true,
+              physics: AlwaysScrollableScrollPhysics(),
+              itemCount: 3, // Replace with actual lesson count
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: EdgeInsets.only(bottom: 10.h),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
+                  height: 80.h,
+                  decoration: appBoxShadow(
+                    radius: 10,
+                    sR: 2,
+                    bR: 3,
+                    color: const Color.fromRGBO(255, 255, 255, 1),
+                  ),
+                  child: Row(
+                    children: [
+                      AppBoxDecorationImage(
+                        imagePath: "${AppConstants.IMAGE_UPLOADS_PATH}default.png",
+                        width: 60.w,
+                        height: 60.h,
+                        fit: BoxFit.cover,
+                      ),
+                      SizedBox(width: 0.1.w),
+                      const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text13Normal(text: "This is first lesson",),
+                            Text10Normal(text: "This is first lesson",)
+                          ],
+                      ),
+                      Expanded(child:Container()),
+                      AppImage(imagePath: ImageRes.arrowRight,width: 10,height: 10,)
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
