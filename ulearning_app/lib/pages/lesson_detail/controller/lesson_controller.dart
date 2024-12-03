@@ -1,11 +1,11 @@
 // course_controller.dart
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:ulearning_app/common/models/course_entites.dart';
+
 import 'package:ulearning_app/common/models/lesson_entities.dart';
-import 'package:ulearning_app/pages/course_detail/repo/course_repo.dart';
+
 import 'package:ulearning_app/pages/lesson_detail/repo/lesson_repo.dart';
 
-import '../../../common/models/course_entites.dart';
+
 
 part 'lesson_controller.g.dart';
 
