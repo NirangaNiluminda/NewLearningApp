@@ -99,3 +99,30 @@ class LessonVideoItem {
     'thumbnail': thumbnail,
   };
 }
+
+class LessonVideo {
+  final List<LessonVideoItem> lessonItem;
+  final Future<void>? initializeVideoPlayer;
+  final bool isPlay;
+
+  // Constructor with named parameters and default values
+  LessonVideo({
+    this.lessonItem = const <LessonVideoItem>[],
+    this.initializeVideoPlayer,
+    this.isPlay = false,
+  });
+
+  // copyWith method for creating a new instance with updated values
+  LessonVideo copyWith({
+    List<LessonVideoItem>? lessonItem,
+    Future<void>? initializeVideoPlayer,
+    bool? isPlay,
+  }) {
+    return LessonVideo(
+      lessonItem: lessonItem ?? this.lessonItem,
+      initializeVideoPlayer: initializeVideoPlayer ?? this.initializeVideoPlayer,
+      isPlay: isPlay ?? this.isPlay,
+    );
+  }
+}
+

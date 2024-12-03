@@ -116,6 +116,8 @@ class Text10Normal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      overflow: TextOverflow.ellipsis,
+      maxLines: 1,
       textAlign: TextAlign.start,
       style:
           TextStyle(color: color, fontSize: 10, fontWeight: FontWeight.normal),

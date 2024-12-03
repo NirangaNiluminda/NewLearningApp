@@ -63,16 +63,22 @@ class _CourseDetailState extends ConsumerState<CourseDetail> {
                           ],
                         ),
                   error: (error, traceStack) => const Text("Error Loading the Course data"),
-                  loading: () => const Center(
-                        child: CircularProgressIndicator(),
-                      )),
+                  loading: () => SizedBox(
+                    height: 500.h,
+                    child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                  )),
               lessonData.when(
                   data: (data) => data == null
                       ? const SizedBox()
-                      : LessonInfo(),
+                      : LessonInfo(lessonData:data),
                   error: (error, traceStack) => const Text("Error Loading the lesson data"),
-                  loading: () => const Center(
-                    child: CircularProgressIndicator(),
+                  loading: () => Container(
+                    height: 500.h,
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   )),
             ],
           ),
