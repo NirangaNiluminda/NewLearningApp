@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/models/course_entites.dart';
 import 'package:ulearning_app/common/models/lesson_entities.dart';
@@ -10,6 +11,7 @@ import 'package:ulearning_app/common/widgets/app_shadow.dart';
 import 'package:ulearning_app/common/widgets/button_widgets.dart';
 import 'package:ulearning_app/common/widgets/image_widgets.dart';
 import 'package:ulearning_app/common/widgets/text_widgets.dart';
+import 'package:ulearning_app/pages/lesson_detail/controller/lesson_controller.dart';
 
 class CourseDetailsPage extends StatelessWidget {
   final CourseItem courseItem;
@@ -247,7 +249,8 @@ class CourseInfo extends StatelessWidget {
 }
 class LessonInfo extends StatelessWidget {
   final List<LessonItem> lessonData;
-  const LessonInfo({Key? key, required this.lessonData}) : super(key: key);
+  final WidgetRef ref;
+  const LessonInfo({Key? key, required this.lessonData, required this.ref}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -280,6 +283,7 @@ class LessonInfo extends StatelessWidget {
                 ),
                 child: InkWell(
                   onTap: () {
+                    ref.watch(lessonDetailControllerProvider(index: lessonData[index].id!));
                     Navigator.of(context).pushNamed(
                       "/lessonDetail",
                       arguments: {

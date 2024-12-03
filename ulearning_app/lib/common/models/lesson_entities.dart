@@ -104,12 +104,14 @@ class LessonVideo {
   final List<LessonVideoItem> lessonItem;
   final Future<void>? initializeVideoPlayer;
   final bool isPlay;
+  final String url;
 
   // Constructor with named parameters and default values
-  LessonVideo({
+  LessonVideo( {
     this.lessonItem = const <LessonVideoItem>[],
     this.initializeVideoPlayer,
     this.isPlay = false,
+    this.url = "",
   });
 
   // copyWith method for creating a new instance with updated values
@@ -117,11 +119,12 @@ class LessonVideo {
     List<LessonVideoItem>? lessonItem,
     Future<void>? initializeVideoPlayer,
     bool? isPlay,
+    String? url,
   }) {
     return LessonVideo(
       lessonItem: lessonItem ?? this.lessonItem,
       initializeVideoPlayer: initializeVideoPlayer ?? this.initializeVideoPlayer,
-      isPlay: isPlay ?? this.isPlay,
+      isPlay: isPlay ?? this.isPlay,url:url??this.url
     );
   }
 }

@@ -1,5 +1,5 @@
 class AppConstants {
-  static const String SERVER_API_URL = "http://10.0.2.2:8000/";
+  static const String SERVER_API_URL = "https://11db-45-121-88-67.ngrok-free.app/";
   static String IMAGE_UPLOADS_PATH = "${SERVER_API_URL}uploads/";
   
   static const String STORAGE_USER_PROFILE_KEY = "user_profile";

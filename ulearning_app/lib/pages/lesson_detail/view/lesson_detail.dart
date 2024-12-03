@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/utils/constants.dart';
 import 'package:ulearning_app/common/widgets/app_shadow.dart';
 import 'package:ulearning_app/pages/course_detail/controller/course_controller.dart';
 import 'package:ulearning_app/pages/lesson_detail/controller/lesson_controller.dart';
+import 'package:video_player/video_player.dart';
 
 class LessonDetail extends ConsumerStatefulWidget {
   const LessonDetail({Key? key}) : super(key: key);
@@ -27,8 +29,8 @@ class _LessonDetailState extends ConsumerState<LessonDetail> {
 
   @override
   Widget build(BuildContext context) {
-    var lessionDetails =
-        ref.watch(courseLessonDetailControllerProvider(index: arg.toInt()));
+    /*var lessionDetails = ref.watch(lessonDetailControllerProvider(index: arg.toInt()));*/
+    var lessonData = ref.watch(lessonDataControllerProvider);
     // Safely parse the string 'args' into an integer
     // int lessonIndex;
     // try {
@@ -66,17 +68,29 @@ class _LessonDetailState extends ConsumerState<LessonDetail> {
       appBar: AppBar(),
       body: Center(
         child: Container(
-          child: lessionDetails.when(
-              data: (data) => Column(
-                children: [
-                  Text(data!.elementAt(0).name.toString()),
-                  AppBoxDecorationImage(
-                    imagePath: "${AppConstants.IMAGE_UPLOADS_PATH}${data!.elementAt(0).thumbnail}",
-                  )
-                ],
+          child: lessonData.when(
+              data: (data) => Container(
+                width: 325.w,
+                height: 200.h,
+                child: FutureBuilder(future: data.initializeVideoPlayer,
+                    builder: (context,snapshot){
+                     if(snapshot.connectionState== ConnectionState.done){
+                       return  videoPlayerController==null?Container():Stack(
+                         children: [
+                           VideoPlayer(videoPlayerController!),
+
+                         ],
+                       );
+                     }else{
+                       return const Center(
+                         child: CircularProgressIndicator(),
+                       );
+                     }
+                    }
+                    ),
               ),
               error: (error, traceStack) => Text(error.toString()),
-              loading: () => Text("Loading...")),
+              loading: () => const Text("Loading...")),
         ),
       ),
     );
