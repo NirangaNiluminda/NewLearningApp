@@ -169,7 +169,7 @@ class CourseDetailGoBuyButton extends StatelessWidget {
 
 class CourseDetailsInclude extends StatelessWidget {
   final CourseItem courseItem;
-  const CourseDetailsInclude({Key? key, required this.courseItem})
+  const CourseDetailsInclude({Key? key,  required this.courseItem})
       : super(key: key);
 
   @override
@@ -244,7 +244,7 @@ class CourseInfo extends StatelessWidget {
   }
 }
 
-class LessonInfo extends StatelessWidget {
+class LessonInfo extends ConsumerWidget {
   const LessonInfo({Key? key}) : super(key: key);
 
   @override

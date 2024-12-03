@@ -9,7 +9,7 @@ import 'package:ulearning_app/common/widgets/app_bar.dart';
 import 'package:ulearning_app/common/widgets/app_shadow.dart';
 import 'package:ulearning_app/common/widgets/image_widgets.dart';
 import 'package:ulearning_app/common/widgets/text_widgets.dart';
-import 'package:ulearning_app/pages/course_detail/controller/course_detail_controller.dart';
+import 'package:ulearning_app/pages/course_detail/controller/course_controller.dart';
 import 'package:ulearning_app/pages/course_detail/view/widget/course_detail_widgets.dart';
 
 class CourseDetail extends ConsumerStatefulWidget {
@@ -33,41 +33,51 @@ class _CourseDetailState extends ConsumerState<CourseDetail> {
 
   @override
   Widget build(BuildContext context) {
-    var stateData =
+    var courseData =
         ref.watch(courseDetailControllerProvider(index: args.toInt()));
-
+    var lessonData =
+        ref.watch(courseLessonListControllerProvider(index: args.toInt()));
     return Scaffold(
       appBar: buildGlobalAppBar(title: "Course Detail"),
-      body: stateData.when(
-          data: (data) => data == null
-              ? SizedBox()
-              : Padding(
-                padding: EdgeInsets.only(left: 25.w, right: 25.w),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        CourseDetailsThumbnail(courseItem: data),
-                        CourseDetailIconText(courseItem: data,),
-                        CourseDetailDescription(courseItem: data),
-<<<<<<< Updated upstream
-                        CourseDetailGoBuyButton(),
-                        CourseDetailsInclude()
-=======
-                        const CourseDetailGoBuyButton(),
-                        CourseDetailsInclude(courseItem:data),
-                        const LessonInfo(),
->>>>>>> Stashed changes
-                        
-                      ],
-                    ),
-                ),
-              ),
-          error: (error, traceStack) => Text("Error Loading the data"),
-          loading: () => Center(
-                child: CircularProgressIndicator(),
-              )),
+      body: Padding(
+        padding: EdgeInsets.only(left: 25.w, right: 25.w),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              courseData.when(
+                  data: (data) => data == null
+                      ? const SizedBox()
+                      : Column(
+                          children: [
+                            CourseDetailsThumbnail(courseItem: data),
+                            CourseDetailIconText(
+                              courseItem: data,
+                            ),
+                            CourseDetailDescription(courseItem: data),
+                            CourseDetailGoBuyButton(),
+                            CourseDetailsInclude(
+                              courseItem: data,
+                            ),
+                          ],
+                        ),
+                  error: (error, traceStack) => const Text("Error Loading the Course data"),
+                  loading: () => const Center(
+                        child: CircularProgressIndicator(),
+                      )),
+              lessonData.when(
+                  data: (data) => data == null
+                      ? const SizedBox()
+                      : LessonInfo(),
+                  error: (error, traceStack) => const Text("Error Loading the lesson data"),
+                  loading: () => const Center(
+                    child: CircularProgressIndicator(),
+                  )),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
