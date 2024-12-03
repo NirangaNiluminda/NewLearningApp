@@ -49,6 +49,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: AppTheme.appThemeData,
 
+      debugShowCheckedModeBanner: false,
       //initialRoute: "/",
       //routes: routeMap,
       onGenerateRoute: AppPages.generaterouteSettings,
@@ -72,6 +73,7 @@ class MyHomePage extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: const Text("RiverPod App"),
+        
       ),
       body: Center(
         child: Column(
