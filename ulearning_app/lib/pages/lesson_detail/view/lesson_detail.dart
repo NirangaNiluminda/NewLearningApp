@@ -28,6 +28,12 @@ class _LessonDetailState extends ConsumerState<LessonDetail> {
   }
 
   @override
+  void dispose(){
+    videoPlayerController?.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     /*var lessionDetails = ref.watch(lessonDetailControllerProvider(index: arg.toInt()));*/
     var lessonData = ref.watch(lessonDataControllerProvider);
@@ -67,27 +73,32 @@ class _LessonDetailState extends ConsumerState<LessonDetail> {
     return Scaffold(
       appBar: AppBar(),
       body: Center(
-        child: Container(
+        child: lessonData.value!.lessonItem.isEmpty?const Center(child: CircularProgressIndicator()):Container(
           child: lessonData.when(
               data: (data) => Container(
                 width: 325.w,
                 height: 200.h,
+                decoration: BoxDecoration(
+                    image:DecorationImage(image:NetworkImage(
+                        "${AppConstants.IMAGE_UPLOADS_PATH}${data.lessonItem[0].thumbnail}"
+                    ))
+                ),
                 child: FutureBuilder(future: data.initializeVideoPlayer,
                     builder: (context,snapshot){
-                     if(snapshot.connectionState== ConnectionState.done){
-                       return  videoPlayerController==null?Container():Stack(
-                         children: [
-                           VideoPlayer(videoPlayerController!),
+                      if(snapshot.connectionState== ConnectionState.done){
+                        return  videoPlayerController==null?Container():Stack(
+                          children: [
+                            VideoPlayer(videoPlayerController!),
 
-                         ],
-                       );
-                     }else{
-                       return const Center(
-                         child: CircularProgressIndicator(),
-                       );
-                     }
+                          ],
+                        );
+                      }else{
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
                     }
-                    ),
+                ),
               ),
               error: (error, traceStack) => Text(error.toString()),
               loading: () => const Text("Loading...")),

@@ -26,16 +26,21 @@ Future<void> lessonDetailController(
 
   // Check if the response is successful
   if (response.code == 200) {
-    var url = "${AppConstants.IMAGE_UPLOADS_PATH}${response.data!.elementAt(0).url}";
+    var url = response.data!.isNotEmpty &&
+        response.data!.elementAt(0).url != null
+        ? "${AppConstants.IMAGE_UPLOADS_PATH}${response.data!.elementAt(0).url!}"
+        : "https://c578-45-121-88-67.ngrok-free.app/uploads/files/d3b091ff518aa62e69a16471a7547515.mp4";
+    print(url);
   videoPlayerController = VideoPlayerController.network(url);
   var initializeVideoPlayerFuture = videoPlayerController?.initialize();
-
+//
   LessonVideo vidInstance =  LessonVideo(
     lessonItem: response.data!,
-    isPlay: false,
+    isPlay: true,
     initializeVideoPlayer: initializeVideoPlayerFuture,
     url: url
   );
+  videoPlayerController?.play();
   ref.read(lessonDataControllerProvider.notifier).updateLessonData(vidInstance);
    
   } else {
